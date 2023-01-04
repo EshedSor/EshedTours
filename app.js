@@ -10,19 +10,25 @@ var sessions = require('express-session')
 var flash = require('connect-flash')
 var app = express();
 const mongoose = require('mongoose');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+
+//DB Connection
 mongoose.connect('mongodb://127.0.0.1:27017/eshedtours',{
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => { console.log("Sucess connecting to db") });
 mongoose.set('strictQuery', false);
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 //Models
 const User = require('./models/user');
-
+const Plane = require('./models/plane');
+const Flight = require('./models/flight');
+const Ticket = require('./models/ticket');
 //Middleware
 app.use(logger('dev'));
 app.use(express.json());
@@ -34,18 +40,14 @@ app.use(sessions({ secret: 'kanunu', resave: true, saveUninitialized: true }));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+
 //authentication setup
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 //Routes
 app.use('/', indexRouter);
-/*
-app.use('/',async (req,res)=>{
-  let user = new User({email:'test1@test.com'});
-  const created_user = await User.register(user,'kanunu');
-  res.send(created_user);
-})*/
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
