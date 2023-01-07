@@ -6,6 +6,6 @@ const cartSchema = new schema({
   tickets: [{ ticket: { type: mongoose.Types.ObjectId, ref: "Tickets" } }],
 });
 
-const User = mongoose.model("Carts", cartSchema);
+const Cart = mongoose.model("Carts", cartSchema);
 
-module.exports = User;
+module.exports = Cart;

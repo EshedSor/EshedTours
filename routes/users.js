@@ -24,8 +24,6 @@ router.get("/:id", canLogOut, isCurrentUser, getUser);
 router.post("/", isLoggedIn, createUser);
 
 /* PUT/PATCH updates exiting user */
-router.get("/:id/edit", canLogOut, isCurrentUser, getUserEdit);
-/* PUT/PATCH updates exiting user */
 router.put("/:id/edit", canLogOut, isCurrentUser, updateUser);
 /* DELETE specific user */
 router.delete("/:id", canLogOut, isCurrentUser, deleteUser);

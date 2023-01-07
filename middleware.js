@@ -1,3 +1,4 @@
+const User = require("./models/user");
 module.exports.isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     return res.redirect("/");
@@ -18,5 +19,25 @@ module.exports.isCurrentUser = (req, res, next) => {
     next();
   } else {
     return res.redirect("/users/" + req.user._id);
+  }
+};
+module.exports.isAdmin = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+    console.log("id " + user);
+    if (user) {
+      if (user.role === "admin") {
+        next();
+      } else {
+        req.flash("success", "Permission denied");
+        return res.redirect("/");
+      }
+    } else {
+      req.flash("success", "Permission denied");
+      return res.redirect("/");
+    }
+  } catch (e) {
+    req.flash("success", "Permission denied");
+    return res.redirect("/");
   }
 };

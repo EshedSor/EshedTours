@@ -1,0 +1,32 @@
+<div class="row justify-content-md-center">
+    <div class="card-wrapper col-12 col-md-4 mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Seats</th>
+                    <th scope="col">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0;i<planeQuery.length;i++){%>
+                    <tr>
+                        <td>
+                            <%= planeQuery[i]._id %>
+                        </td>
+                        <td>
+                            <%= planeQuery[i]._type %>
+                        </td>
+                        <td>
+                            <%= planeQuery[i].seats %>
+                        </td>
+                        <td> <a type="button" class="btn btn-success btn-secondary"
+                                href="/planes/<%= planeQuery[i]._id %>">Edit</a>
+                        </td>
+                    </tr>
+            </tbody>
+            <% } %>
+        </table>
+    </div>
+</div>

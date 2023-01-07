@@ -3,7 +3,10 @@
     <div class="card" id="logincard">
       <div class="card-body">
         <h4 class="card-title">Create new account</h4>
-        <form action="/users/<%=user._id %>/edit?_method=PUT" method="POST">
+        <form
+          action="/users/<%=currentUser._id %>/edit?_method=PUT"
+          method="POST"
+        >
           <div class="form-group">
             <label for="name">Name</label>
             <input
@@ -13,7 +16,7 @@
               name="name"
               required=""
               autofocus=""
-              value="<%= user.name %>"
+              value="<%= currentUser.name %>"
             />
           </div>
 
@@ -26,7 +29,7 @@
               name="surname"
               required=""
               autofocus=""
-              value="<%= user.surname %>"
+              value="<%= currentUser.surname %>"
             />
           </div>
 
@@ -38,7 +41,7 @@
               class="form-control"
               name="email"
               required=""
-              value="<%= user.email %>"
+              value="<%= currentUser.email %>"
             />
           </div>
 
