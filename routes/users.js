@@ -1,48 +1,32 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var flash = require('connect-flash')
-
-const User = require('../models/user');
-const {isLoggedIn} = require('../middleware');
-
-
+var flash = require("connect-flash");
+var methodOverride = require("method-override");
+const User = require("../models/user");
+const { isLoggedIn, canLogOut, isCurrentUser } = require("../middleware");
+const {
+  getAllUsers,
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
+  getUserEdit,
+} = require("../controllers/users");
 router.use(flash());
 
 /* GET users listing. */
-router.get('/', (req, res, next)=> {
-  return res.send('respond with a resource');
-});
+router.get("/", canLogOut, getAllUsers);
 
 /* GET specifid User */
-router.get('/:id',(req,res,next)=>{
-
-});
+router.get("/:id", canLogOut, isCurrentUser, getUser);
 
 /*POST create new user (register) */
-router.post('/',isLoggedIn,async (req,res,next)=>{
-  //destructuring body
-  try{
-  const {name,surname,email,password} = req.body;
-  const user = new User({name,surname,email});
-  const registered = await User.register(user,password);
-  console.log(registered);
-  req.flash('success','Welcome to Eshedtours');
-  return res.redirect('/');
-}catch(e){
-  req.flash('success','Email already in use');
-  return res.redirect('../register')
-
-}
-
-});
+router.post("/", isLoggedIn, createUser);
 
 /* PUT/PATCH updates exiting user */
-router.put('/:id',(req,res,next)=>{
-
-});
-
+router.get("/:id/edit", canLogOut, isCurrentUser, getUserEdit);
+/* PUT/PATCH updates exiting user */
+router.put("/:id/edit", canLogOut, isCurrentUser, updateUser);
 /* DELETE specific user */
-router.delete('/:id',(req,res,next)=>{
-
-});
+router.delete("/:id", canLogOut, isCurrentUser, deleteUser);
 module.exports = router;

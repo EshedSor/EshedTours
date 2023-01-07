@@ -1,53 +1,57 @@
-const mongoose= require('mongoose');
+const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const flightSchema = new schema({
-    origin:{
-        Country:{
-            type:'String',
-            required:true
-        },
-        City:{
-            type:'String',
-            required:true
-        },
-        Airport:{
-            type:'String',
-            required:true
-        },
+const flightSchema = new schema(
+  {
+    origin: {
+      Country: {
+        type: "String",
+        required: true,
+      },
+      City: {
+        type: "String",
+        required: true,
+      },
+      Airport: {
+        type: "String",
+        required: true,
+      },
     },
-    destination:{
-        Country:{
-            type:'String',
-            required:true
+    destination: {
+      Country: {
+        type: "String",
+        required: true,
+      },
+      City: {
+        type: "String",
+        required: true,
+      },
+      Airport: {
+        type: "String",
+        required: true,
+      },
     },
-        City:{
-            type:'String',
-            required:true
+    departure: {
+      type: Date,
+      required: true,
     },
-        Airport:{
-            type:'String',
-            required:true
-        },
+    arrival: {
+      type: Date,
+      required: true,
     },
-    departure:{
-        type:Date,
-        required:true
+    plane: { type: mongoose.Types.ObjectId, ref: "Planes" },
+  },
+  {
+    methods: {
+      getDepartureTime() {},
+      getArrivalTime() {},
+      getRemainingTickets() {},
+      getPlaneSize() {},
+      getSoldTickets() {},
     },
-    arrival:{
-        type:Date,
-        required:true
-    },
-},
-{   methods:{
-        getDepartureTime(){},
-        getArrivalTime(){},
-        getRemainingTickets(){},
-        getPlaneSize(){},
-        getSoldTickets(){}
-},
-});
+  }
+);
 
-const Flight = mongoose.model('Flights',flightSchema);
+const Flight = mongoose.model("Flights", flightSchema);
 
 module.exports = Flight;

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>LandingPage</title>
+  </head>
+  <%- include('partials/header') -%> <%- include('partials/flash') -%>
+  <nav>
+    <div
+      class="nav nav-tabs justify-content-center"
+      id="nav-tab"
+      role="tablist"
+    >
+      <button
+        class="nav-link active"
+        id="nav-home-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-home"
+        type="button"
+        role="tab"
+        aria-controls="nav-home"
+        aria-selected="true"
+      >
+        Profile
+      </button>
+      <button
+        class="nav-link"
+        id="nav-profile-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-profile"
+        type="button"
+        role="tab"
+        aria-controls="nav-profile"
+        aria-selected="false"
+      >
+        Payment
+      </button>
+      <button
+        class="nav-link"
+        id="nav-contact-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-contact"
+        type="button"
+        role="tab"
+        aria-controls="nav-contact"
+        aria-selected="false"
+      >
+        History
+      </button>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div
+      class="tab-pane fade show active"
+      id="nav-home"
+      role="tabpanel"
+      aria-labelledby="nav-home-tab"
+      tabindex="0"
+    >
+    <%- include('partials/profile') -%>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="nav-profile"
+      role="tabpanel"
+      aria-labelledby="nav-profile-tab"
+      tabindex="0"
+    >
+    <%- include('partials/payment') -%>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="nav-contact"
+      role="tabpanel"
+      aria-labelledby="nav-contact-tab"
+      tabindex="0"
+    >
+    <%- include('partials/history') -%>
+    </div>
+    </div>
+  </div>
+  <%- include('partials/footer') %>
+</html>
