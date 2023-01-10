@@ -16,10 +16,23 @@ const getInboundFlight = async () => {
   });
   return inbound;
 };
+const closeForm = () => {
+  var popup = document.getElementById("popup");
+  popup.style.display = "None";
+  var form = document.getElementById("ticketForm");
+  form.reset();
+  var seatList = document.getElementById("seat");
+  seatList.innerHTML = "";
+};
 //----------------------
 const showTicketForm = async (flightID) => {
+  console.log(flightID);
   var popup = document.getElementById("popup");
   popup.style.display = "block";
+  var cancelBtn = document.getElementById("cancel");
+  cancelBtn.setAttribute("onclick", "closeForm()");
+  var addBtn = document.getElementById("addticket");
+  addBtn.setAttribute("onclick", "addTicket('" + flightID + "')");
   var availableSeats = await fetch("/flights/" + flightID + "/seats").then(
     (response) => {
       return response.json();
@@ -33,20 +46,21 @@ const showTicketForm = async (flightID) => {
     optionItem.innerHTML = element;
     seatList.append(optionItem);
   });
+
   //console.log(availableSeats);
 };
 //----------------------
 const setOutboundTable = (outboundData) => {
-  console.log(outboundData);
+  //console.log(outboundData);
   const outboundTableBody = document.querySelector("#outbound");
-  console.log(outboundTableBody);
+  //console.log(outboundTableBody);
   const origin = (document.createElement("td").textContent =
     outboundData.origin.country +
     ", " +
     outboundData.origin.city +
     ", " +
     outboundData.origin.airport);
-  console.log(origin);
+  //console.log(origin);
   const destination = document.createElement("td");
   destination.textContent =
     outboundData.destination.country +
@@ -78,9 +92,9 @@ const setOutboundTable = (outboundData) => {
 };
 //----------------------
 const setInboundTable = (inboundData) => {
-  console.log(inboundData);
+  //console.log(inboundData);
   const inboundTableBody = document.querySelector("#inbound");
-  console.log(inboundTableBody);
+  //console.log(inboundTableBody);
   const origin = (document.createElement("td").textContent =
     inboundData.origin.country +
     ", " +

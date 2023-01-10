@@ -1,26 +1,14 @@
 <div id="popup">
-  <h4 class="card-title">Login</h4>
-  <form action="/cart" method="POST">
+  <h4 class="card-title">Ticket Form</h4>
+  <form name="ticketform" id="ticketForm">
     <div class="form-group">
       <label for="name">Name:</label>
-      <input
-        id="name"
-        class="form-control"
-        name="name"
-        required=""
-        autofocus=""
-      />
+      <input id="name" class="form-control" name="name" required="" />
     </div>
 
     <div class="form-group">
       <label for="surname">Surname:</label>
-      <input
-        id="surname"
-        class="form-control"
-        name="surname"
-        required=""
-        autofocus=""
-      />
+      <input id="surname" class="form-control" name="surname" required="" />
     </div>
     <div class="form-group">
       <label for="passportid">Passport:</label>
@@ -29,15 +17,35 @@
         class="form-control"
         name="passportid"
         required=""
-        autofocus=""
       />
     </div>
+    <br />
     <div class="form-group">
       <label for="seat">seat</label>
       <select id="seat" name="seat"></select>
     </div>
+    <br />
     <div class="form-group no-margin">
-      <input class="btn btn-primary btn-block" type="submit" value="Sign in" />
+      <div
+        class="btn-toolbar justify-content-between"
+        role="toolbar"
+        aria-label="Toolbar with button groups"
+      >
+        <div class="btn-group me-2" role="group" aria-label="First group">
+          <button type="button" class="btn btn-danger btn-block" id="cancel">
+            Cancel
+          </button>
+        </div>
+        <div class="btn-group me-2" role="group" aria-label="Second group">
+          <button
+            type="button"
+            class="btn btn-success btn-block"
+            id="addticket"
+          >
+            Add Ticket
+          </button>
+        </div>
+      </div>
     </div>
   </form>
 </div>
