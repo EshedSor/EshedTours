@@ -3,7 +3,12 @@ var router = express.Router();
 var flash = require("connect-flash");
 var methodOverride = require("method-override");
 const User = require("../models/user");
-const { isLoggedIn, canLogOut, isCurrentUser } = require("../middleware");
+const {
+  isLoggedIn,
+  canLogOut,
+  isCurrentUser,
+  isAdmin,
+} = require("../middleware");
 const {
   getAllUsers,
   getUser,
@@ -15,7 +20,7 @@ const {
 router.use(flash());
 
 /* GET users listing. */
-router.get("/", canLogOut, getAllUsers);
+router.get("/", canLogOut, isAdmin, getAllUsers);
 
 /* GET specifid User */
 router.get("/:id", canLogOut, isCurrentUser, getUser);

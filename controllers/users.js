@@ -28,7 +28,6 @@ module.exports.createUser = async (req, res, next) => {
     const { name, surname, email, password } = req.body;
     const user = new User({ name, surname, email });
     const registered = await User.register(user, password);
-    console.log(registered);
     req.flash("success", "Welcome to Eshedtours");
     return res.redirect("/");
   } catch (e) {

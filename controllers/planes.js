@@ -30,7 +30,6 @@ module.exports.createPlane = async (req, res, next) => {
   try {
     const { seats, _type } = req.body;
     const plane = await Plane.create({ seats, _type });
-    console.log(plane);
     req.flash("success", "new plane created");
     return res.redirect("/planes");
   } catch (e) {

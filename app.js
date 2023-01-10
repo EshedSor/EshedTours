@@ -8,6 +8,7 @@ var methodOverride = require("method-override");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var planesRouter = require("./routes/planes");
+var flightsRouter = require("./routes/flights");
 //------------
 var sessions = require("express-session");
 var flash = require("connect-flash");
@@ -36,7 +37,6 @@ const User = require("./models/user");
 const Plane = require("./models/plane");
 const Flight = require("./models/flight");
 const Ticket = require("./models/ticket");
-const Cart = require("./models/cart");
 
 //Middleware
 app.use(logger("dev"));
@@ -68,6 +68,7 @@ app.use((req, res, next) => {
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/planes", planesRouter);
+app.use("/flights", flightsRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

@@ -14,6 +14,8 @@
   integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
   crossorigin="anonymous"
 ></script>
+<script type="text/javascript" src="/javascripts/cart.js"></script>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="/"
@@ -39,13 +41,69 @@
           /></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href=""
-            ><img
-              role="navbaricons"
-              src="/images/jilagan-Magnifying-Glass.svg"
-              .svg
-              alt=""
-          /></a>
+          <div class="dropdown show">
+            <a
+              class="nav-link dropdown-toggle"
+              id="searchmenu"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="true"
+              ><img
+                role="navbaricons"
+                src="/images/jilagan-Magnifying-Glass.svg"
+                .svg
+                alt=""
+            /></a>
+            <div class="dropdown-menu" aria-labelledby="searchmenu">
+              <form action="/flights/search" method="GET">
+                <label for="origin">Origin</label>
+                <input
+                  id="origin"
+                  class="form-control"
+                  name="origin"
+                  required=""
+                />
+                <label for="destination">Destination</label>
+                <input
+                  id="destination"
+                  class="form-control"
+                  name="destination"
+                  required=""
+                />
+                <label for="departure">Departure</label>
+                <input
+                  type="date"
+                  id="departure"
+                  class="form-control"
+                  name="departure"
+                  required=""
+                />
+                <label for="arrival">Arrival</label>
+                <input
+                  type="date"
+                  id="arrival"
+                  class="form-control"
+                  name="arrival"
+                  required=""
+                />
+                <label for="min">Min Price</label>
+                <input type="number" id="min" name="min" min="0" value="0" />
+                <label for="max">max Price</label>
+                <input
+                  type="number"
+                  id="max"
+                  name="max"
+                  max="9999"
+                  value="9999"
+                />
+                <input
+                  class="btn btn-primary btn-block"
+                  type="submit"
+                  value="Search"
+                />
+              </form>
+            </div>
+          </div>
         </li>
         <li class="nav-item">
           <a class="nav-link" href=""
@@ -107,13 +165,23 @@
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="Planes">Planes</a>
-              <a class="dropdown-item" href="Users">Users</a>
-              <a class="dropdown-item" href="Flights">Flights</a>
+              <a class="dropdown-item" href="/Planes">Planes</a>
+              <a class="dropdown-item" href="/Users">Users</a>
+              <a class="dropdown-item" href="/Flights">Flights</a>
             </div>
           </div>
         </li>
         <% } %>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            type="image"
+            role="navbaricons2"
+            onclick="getCartPage()"
+            ><img src="/images/cart1-svgrepo-com.svg" role="navbaricons" alt=""
+          /></a>
+        </li>
       </ul>
     </div>
   </div>

@@ -17,7 +17,10 @@ passport.deserializeUser(User.deserializeUser());
 router.get("/", function (req, res, next) {
   return res.render("landingpage.ejs");
 });
-
+/* GET home page. */
+router.get("/cart", canLogOut, function (req, res, next) {
+  return res.render("cart.ejs");
+});
 //Settings
 router.get("/settings", function (req, res, next) {
   return res.render("settings.ejs");

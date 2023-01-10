@@ -1,0 +1,62 @@
+<div class="row justify-content-md-center">
+    <div class="card-wrapper col-12 col-md-4 mt-5">
+        <div class="card">
+            <div class="card-body">
+                <form action="/flights/create" method="POST">
+                    <div class="form-group">
+                        <label>Origin</label><br>
+                        <label for="origin_country">Country</label>
+                        <input id="origin_country" class="form-control" name="origin_country" required=""
+                            autofocus="" />
+                            <label for="origin_city">City</label>
+                    <input id="origin_city" class="form-control" name="origin_city" required="" autofocus="" />
+                    <label for="origin_airport">Airport</label>
+                    <input id="origin_airport" class="form-control" name="origin_airport" required="" autofocus="" />    
+                </div>
+                <div class="form-group">
+                    <label>Destination</label><br>
+                    <label for="destination_country">Country</label>
+                    <input id="destination_country" class="form-control" name="destination_country" required=""
+                        autofocus="" />
+                        <label for="destination_city">City</label>
+                <input id="destination_city" class="form-control" name="destination_city" required="" autofocus="" />
+                <label for="destination_airport">Airport</label>
+                <input id="destination_airport" class="form-control" name="destination_airport" required="" autofocus="" />    
+            </div>
+            <div class="form-group">
+                <label for="departure">Departure</label>
+                <input type = "datetime-local" id="departure" class="form-control" name="departure" required="" autofocus="" /> 
+                <label for="arrival">Arrival</label>
+                <input type = "datetime-local" id="arrival" class="form-control" name="arrival" required="" autofocus="" />   
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input
+              id="price"
+              class="form-control"
+              name="price"
+              type="number"
+              required=""
+            />
+          </div>
+        <div class="form-group">
+            <label for="plane_type">Plane Type</label>
+            <select id="plane_type" name="plane_type">
+                <% for(var i = 0;i<planes.length;i++){ %>
+                    <option value ="<%= planes[i]._id %>">Type:<%= planes[i]._type %>  , Seats:<%=planes[i].seats%></option>
+                <% } %>  
+            </select>
+
+    </div>
+            </div>
+            
+        </div>
+
+        <div class="form-group no-margin">
+            <input class="btn btn-primary btn-block" type="submit" value="Create" />
+        </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>

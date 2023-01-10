@@ -1,32 +1,35 @@
 const mongoose = require("mongoose");
+const { INTEGER } = require("sequelize");
+const Plane = require("./plane");
+const Ticket = require("./ticket");
 const schema = mongoose.Schema;
 
 const flightSchema = new schema(
   {
     origin: {
-      Country: {
+      country: {
         type: "String",
         required: true,
       },
-      City: {
+      city: {
         type: "String",
         required: true,
       },
-      Airport: {
+      airport: {
         type: "String",
         required: true,
       },
     },
     destination: {
-      Country: {
+      country: {
         type: "String",
         required: true,
       },
-      City: {
+      city: {
         type: "String",
         required: true,
       },
-      Airport: {
+      airport: {
         type: "String",
         required: true,
       },
@@ -40,18 +43,47 @@ const flightSchema = new schema(
       required: true,
     },
     plane: { type: mongoose.Types.ObjectId, ref: "Planes" },
+    price: { type: "Number", required: true },
   },
   {
     methods: {
       getDepartureTime() {},
       getArrivalTime() {},
-      getRemainingTickets() {},
+      async getRemainingTickets() {
+        try {
+          const plane = await Plane.findById(this.plane);
+          var allSeats = [...Array(plane.seats).keys()];
+          var takenSeats = await this.getSoldTickets();
+          const freeSeats = allSeats.filter((word) => !(word in takenSeats));
+          //console.log(JSON.stringify(freeSeats));
+          return JSON.stringify(freeSeats);
+        } catch (e) {
+          console.log(e);
+        }
+      },
       getPlaneSize() {},
-      getSoldTickets() {},
+      async getSoldTickets() {
+        var soldTickets = [];
+        const sold = await Ticket.find({ flight: this._id }, "seat").lean();
+        sold.forEach((element) => soldTickets.push(element));
+        return soldTickets;
+      },
     },
   }
 );
-
+/*flightSchema.methods.getRemainingTickets = async () => {
+  const plane = await Plane.findbyid(this.plane);
+  console.log("plane " + plane.lean());
+  var allSeats = [...Array(plane.size).keys()];
+  var takenSeats = this.getSoldTickets();
+  const freeSeats = allSeats.filter((word) => !(word in takenSeats));
+};
+flightSchema.methods.getSoldTickets = async () => {
+  var soldTickets = [];
+  const sold = await Ticket.find({ flight: this._id }, "seat").lean();
+  sold.forEach((element) => soldTickets.push(element));
+  return soldTickets;
+};*/
 const Flight = mongoose.model("Flights", flightSchema);
 
 module.exports = Flight;
