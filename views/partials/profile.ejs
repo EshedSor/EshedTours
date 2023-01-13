@@ -2,7 +2,7 @@
   <div class="card-wrapper col-12 col-md-4 mt-5">
     <div class="card" id="logincard">
       <div class="card-body">
-        <h4 class="card-title">Create new account</h4>
+        <h4 class="card-title">Update Info</h4>
         <form
           action="/users/<%=currentUser._id %>/edit?_method=PUT"
           method="POST"
@@ -44,7 +44,7 @@
               value="<%= currentUser.email %>"
             />
           </div>
-
+          <br />
           <div class="form-group no-margin">
             <input
               type="submit"

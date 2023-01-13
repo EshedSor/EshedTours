@@ -8,7 +8,6 @@ module.exports.isLoggedIn = (req, res, next) => {
 module.exports.canLogOut = (req, res, next) => {
   req.session.returnTo = req.originalUrl;
   if (!req.isAuthenticated()) {
-    console.log(req.session.returnTo);
     return res.redirect("/login");
   }
   next();
@@ -24,7 +23,6 @@ module.exports.isCurrentUser = (req, res, next) => {
 module.exports.isAdmin = async (req, res, next) => {
   try {
     const user = await User.findById(req.user._id);
-    console.log("id " + user);
     if (user) {
       if (user.role === "admin") {
         next();

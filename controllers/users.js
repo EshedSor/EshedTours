@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Cart = require("../models/cart");
 module.exports.getAllUsers = async (req, res, next) => {
   const userQuery = await User.find({})
     .select({ name: 1, surname: 1, email: 1, _id: 1 })
@@ -28,6 +29,10 @@ module.exports.createUser = async (req, res, next) => {
     const { name, surname, email, password } = req.body;
     const user = new User({ name, surname, email });
     const registered = await User.register(user, password);
+    //creates an empty cart
+    const cart = new Cart({ owner: user._id });
+    const newCart = await cart.save();
+    //
     req.flash("success", "Welcome to Eshedtours");
     return res.redirect("/");
   } catch (e) {

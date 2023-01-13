@@ -17,12 +17,9 @@ passport.deserializeUser(User.deserializeUser());
 router.get("/", function (req, res, next) {
   return res.render("landingpage.ejs");
 });
-/* GET home page. */
-router.get("/cart", canLogOut, function (req, res, next) {
-  return res.render("cart.ejs");
-});
+
 //Settings
-router.get("/settings", function (req, res, next) {
+router.get("/settings", canLogOut, function (req, res, next) {
   return res.render("settings.ejs");
 });
 /*-------Login Section-------*/
@@ -41,6 +38,7 @@ router.post(
   }),
   (req, res) => {
     req.flash("success", "Login succesful");
+    console.log("login " + req.session.returnTo);
     const redirectURL = req.session.returnTo || "/";
     console.log(req.session.returnTo);
     delete req.session.returnTo;

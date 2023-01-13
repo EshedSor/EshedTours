@@ -9,6 +9,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var planesRouter = require("./routes/planes");
 var flightsRouter = require("./routes/flights");
+var cartRouter = require("./routes/cart");
 //------------
 var sessions = require("express-session");
 var flash = require("connect-flash");
@@ -16,7 +17,6 @@ var app = express();
 const mongoose = require("mongoose");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-
 //DB Connection
 mongoose
   .connect("mongodb://127.0.0.1:27017/eshedtours", {
@@ -37,9 +37,10 @@ const User = require("./models/user");
 const Plane = require("./models/plane");
 const Flight = require("./models/flight");
 const Ticket = require("./models/ticket");
+const Cart = require("./models/cart");
 
 //Middleware
-app.use(logger("dev"));
+app.use(logger("tiny"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -69,6 +70,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/planes", planesRouter);
 app.use("/flights", flightsRouter);
+app.use("/cart", cartRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

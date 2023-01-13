@@ -61,10 +61,14 @@ module.exports.createFlight = async (req, res, next) => {
   }
 };
 module.exports.getFlight = async (req, res, next) => {
+  res.set("Content-Type", "application/json");
   try {
     const { id } = req.params;
     if (id) {
+      console.log("68");
+      console.log(id);
       const flight = await Flight.findById(id).lean();
+      console.log(flight);
       return res.json(flight);
     }
     return res.json("ERROR:DIDNT GET ID");
