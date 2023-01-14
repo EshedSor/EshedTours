@@ -1,7 +1,11 @@
 const Plane = require("../models/plane");
 const Flight = require("../models/flight");
 module.exports.searchFlight = async (req, res, next) => {
-  var { origin, destination, departure, arrival, min, max } = req.query;
+  var { origin, destination, departure, arrival, min, max, order } = req.query;
+  var ordering = 1;
+  if (order === "pricedsc") {
+    ordering = -1;
+  }
   departure = new Date(departure);
   departure_next = new Date(departure);
   departure_next.setDate(departure_next.getDate() + 1);

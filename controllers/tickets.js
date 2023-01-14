@@ -88,3 +88,28 @@ module.exports.deleteTicket = async (req, res, next) => {
     return res.json(e);
   }
 };
+
+module.exports.getHistory = async (req, res, next) => {
+  try {
+    const history = await Ticket.find({
+      owner: req.user._id,
+      status: "completed",
+    }).lean();
+    console.log(history);
+    if (history) {
+      const promises = history.map(async (ticket) => {
+        const flight = await Flight.findById(ticket.flight).lean();
+        return { ticket, flight };
+      });
+      let data = [];
+      for await (const item of promises) {
+        data.push(item);
+      }
+      return res.json(JSON.stringify(data));
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(404);
+    return res.json(e);
+  }
+};

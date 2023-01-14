@@ -12,8 +12,11 @@ const {
   getTicket,
   createTicket,
   deleteTicket,
+  getHistory,
 } = require("../controllers/tickets");
+router.post("/", canLogOut, createTicket);
+router.get("/history", canLogOut, getHistory);
 router.get("/:id", canLogOut, getTicket);
 router.delete("/:id", canLogOut, deleteTicket);
-router.post("/", canLogOut, createTicket);
+
 module.exports = router;

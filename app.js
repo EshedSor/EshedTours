@@ -12,15 +12,7 @@ var flightsRouter = require("./routes/flights");
 var cartRouter = require("./routes/cart");
 var ticketsRouter = require("./routes/tickets");
 var paymentRouter = require("./routes/payment");
-const paypal = require("paypal-rest-sdk");
 
-paypal.configure({
-  mode: "sandbox", // or 'live'
-  client_id:
-    "AXu5wZ9Q8_8KEnoCnGI_dH8wfFyKWMN53naUEXOYqwPZfyw1fLpPZg8vV5B2SfUbQRcK7gWJW32a2EAt",
-  client_secret:
-    "EIQAe8KBlbBxX03feSik__azAOPwrmr4GCNiCkLJ_JB6hDtFHkpWjJm3nauuGSdtpXdkwYluEkoxiY40",
-});
 //------------
 var sessions = require("express-session");
 var flash = require("connect-flash");

@@ -214,6 +214,49 @@ const addTicket = async (flightID) => {
   closeForm();
   console.log(response);
 };
+const addhistorydata = (ticket, flight) => {
+  var tablebody = document.getElementById("mytickets");
+  var flightid = document.createElement("td");
+  flightid.innerText = ticket.flight;
+  var name = document.createElement("td");
+  name.innerText = ticket.name;
+  var surname = document.createElement("td");
+  surname.innerText = ticket.surname;
+  var passport = document.createElement("td");
+  passport.innerText = ticket.passportID;
+  var origin = document.createElement("td");
+  origin.innerText =
+    flight.origin.country +
+    ", " +
+    flight.origin.city +
+    ", " +
+    flight.origin.airport;
+  var destination = document.createElement("td");
+  destination.innerText =
+    flight.destination.country +
+    ", " +
+    flight.destination.city +
+    ", " +
+    flight.destination.airport;
+  var departure = document.createElement("td");
+  departure.innerText = flight.departure;
+  var arrival = document.createElement("td");
+  arrival.innerText = flight.arrival;
+  var price = document.createElement("td");
+  price.innerText = flight.price;
+
+  var row = document.createElement("tr");
+  row.append(flightid);
+  row.append(name);
+  row.append(surname);
+  row.append(passport);
+  row.append(origin);
+  row.append(destination);
+  row.append(departure);
+  row.append(arrival);
+  row.append(price);
+  tablebody.append(row);
+};
 //----------------------
 const addticketdata = (ticket, flight) => {
   var tablebody = document.getElementById("mytickets");
@@ -287,7 +330,16 @@ const addcartfooter = (total) => {
   row.append(totalprice);
   row.append(btntd);
   tfoot.append(row);
-  table.append(tfoot);
+};
+//----------------------
+const gethistory = async () => {
+  const data = await fetch("/tickets/history").then((response) => {
+    return response;
+  });
+  var datajson = await data.json();
+  console.log(datajson);
+  var parseddata = JSON.parse(datajson);
+  return parseddata;
 };
 //----------------------
 const gettickets = async () => {
@@ -299,6 +351,19 @@ const gettickets = async () => {
   var parseddata = JSON.parse(datajson);
   return parseddata;
 };
+//----------------------
+const generatehistorytable = async () => {
+  var mydata = await gethistory();
+  var total = 0;
+  console.log(mydata);
+  var tablebody = document.getElementById("mytickets");
+  tablebody.innerHTML = "";
+  mydata.forEach((element) => {
+    total += element.flight.price;
+    addhistorydata(element.ticket, element.flight);
+  });
+};
+
 //----------------------
 const generatetickettable = async () => {
   var mydata = await gettickets();
@@ -328,7 +393,7 @@ const removeticket = async (ticketid) => {
 };
 //----------------------
 const checkout = async () => {
-  const response = await fetch("/payment/checkout");
+  window.location.replace("/payment");
 };
 //----------------------
 window.addEventListener("load", async (event) => {
@@ -348,5 +413,7 @@ window.addEventListener("load", async (event) => {
     }
   } else if ("/cart" === window.location.pathname) {
     generatetickettable();
+  } else if ("/settings" === window.location.pathname) {
+    generatehistorytable();
   }
 });

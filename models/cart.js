@@ -11,15 +11,15 @@ const cartSchema = new schema(
   },
   {
     methods: {
-      cartTotal() {
+      async cartTotal() {
         var total = 0;
         const promises = this.tickets.map(async (element) => {
           const ticket = await Ticket.findById(element).lean();
           const flight = await Flight.findById(ticket.flight).lean();
-          return { ticket, flight };
+          return { flight };
         });
         for await (const item of promises) {
-          total+= item.price;
+          total += item.flight.price;
         }
         console.log(total);
         return total;

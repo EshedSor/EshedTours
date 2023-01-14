@@ -92,7 +92,7 @@ module.exports.getMyTickets = async (req, res, next) => {
       const promises = mycart.tickets.map(async (element) => {
         const ticket = await Ticket.findById(element).lean();
         const flight = await Flight.findById(ticket.flight).lean();
-        return { flight };
+        return { ticket, flight };
       });
       let data = [];
       for await (const item of promises) {
