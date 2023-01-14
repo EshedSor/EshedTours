@@ -8,11 +8,12 @@ const Plane = require("../models/plane");
 const Ticket = require("../models/ticket");
 
 const { isLoggedIn, canLogOut } = require("../middleware");
-
-//authentication setup
-//authentication setup
-passport.use(
-  new LocalStrategy({ usernameField: "email" }, User.authenticate())
-);
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+const {
+  getTicket,
+  createTicket,
+  deleteTicket,
+} = require("../controllers/tickets");
+router.get("/:id", canLogOut, getTicket);
+router.delete("/:id", canLogOut, deleteTicket);
+router.post("/", canLogOut, createTicket);
+module.exports = router;

@@ -11,8 +11,8 @@ const { isLoggedIn, canLogOut } = require("../middleware");
 const {
   addOutbound,
   addInbound,
-  getChosenFlights,
-  addTicketToCart,
+  getChosenFlightId,
+  getMyTickets,
   removeTicketFromCart,
 } = require("../controllers/cart");
 /* GET home page. */
@@ -21,6 +21,7 @@ router.get("/", canLogOut, function (req, res, next) {
 });
 router.post("/addoutbound", canLogOut, addOutbound);
 router.post("/addinbound", canLogOut, addInbound);
-router.get("/chosenflights", canLogOut, getChosenFlights);
+router.get("/chosenflights", canLogOut, getChosenFlightId);
+router.get("/tickets", canLogOut, getMyTickets);
 
 module.exports = router;

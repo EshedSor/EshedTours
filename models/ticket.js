@@ -10,6 +10,7 @@ const ticketSchema = new schema(
     seat: { type: Number },
     owner: { type: mongoose.Types.ObjectId, ref: "Users" },
     flight: { type: mongoose.Types.ObjectId, ref: "Flights" },
+    status: { type: String, default: "pending" },
   },
   {
     methods: {},

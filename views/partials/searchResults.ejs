@@ -1,6 +1,6 @@
 
 <div><h3 style="text-align: center; background-color: transparent">
-    Chosen Flights
+    Search Results
   </h3>
 <section class="intro">
     <div class="bg-image h-100" style="background-color: #6095F0;">
@@ -12,13 +12,12 @@
                             <div class="card-body">
                                 <label>Outgoing</label>
                                 <div class="table-responsive">
-                                    <table class="table table-borderless mb-0">
+                                    <table class="table table-borderless mb-0 table-striped">
                                         <thead>
                                             <tr>
-                                                <th scope="col">
-                                                </th>
-                                                <th colspan ='3' scope="col">Origin</th>
-                                                <th colspan ='3' scope="col">Destination</th>
+                                                
+                                                <th colspan ='2' scope="col">Origin</th>
+                                                <th colspan ='2' scope="col">Destination</th>
                                                 <th scope="col">Departure</th>
                                                 <th scope="col">Arrival</th>
                                                 <th scope="col">Price</th>
@@ -28,19 +27,14 @@
                                         <tbody>
                                             <% for(var i=0;i<toFlights.length;i++) {%>
                                                 <tr>
-                                                    <th scope="row">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="flexCheckDefault1" checked />
-                                                        </div>
-                                                    </th>
-                                                    <td colspan ='3'>
-                                                        <%=toFlights[i].origin.country%>,<%=toFlights[i].origin.city%>,
+                                                    
+                                                    <td colspan ='2'>
+                                                        <%=toFlights[i].origin.country%>,<br><%=toFlights[i].origin.city%>,<br>
                                                                 <%=toFlights[i].origin.airport%>
                                                     </td>
-                                                    <td colspan ='3'>
-                                                        <%=toFlights[i].destination.country%>,
-                                                            <%=toFlights[i].destination.city%>,
+                                                    <td colspan ='2'>
+                                                        <%=toFlights[i].destination.country%>,<br>
+                                                            <%=toFlights[i].destination.city%>,<br>
                                                                 <%=toFlights[i].destination.airport%>
                                                     </td>
                                                     <td>
@@ -79,13 +73,11 @@
                             <div class="card-body">
                                 <label>Inbound</label>
                                 <div class="table-responsive">
-                                    <table class="table table-borderless mb-0">
+                                    <table class="table table-borderless mb-0 table-striped">
                                         <thead>
                                             <tr>
-                                                <th scope="col">
-                                                </th>
-                                                <th colspan ='3' scope="col">Origin</th>
-                                                <th colspan ='3'scope="col">Destination</th>
+                                                <th colspan ='2' scope="col">Origin</th>
+                                                <th colspan ='2'scope="col">Destination</th>
                                                 <th scope="col">Departure</th>
                                                 <th scope="col">Arrival</th>
                                                 <th scope="col">Price</th>
@@ -95,20 +87,14 @@
                                         <tbody>
                                             <% for(var i=0;i<returnFlights.length;i++) {%>
                                                 <tr>
-                                                    <th scope="row">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value=""
-                                                                id="flexCheckDefault1" checked />
-                                                        </div>
-                                                    </th>
-                                                    <td colspan ='3'>
-                                                        <%=returnFlights[i].origin.country%>,
-                                                            <%=returnFlights[i].origin.city%>,
+                                                    <td colspan ='2'>
+                                                        <%=returnFlights[i].origin.country%>,<br>
+                                                            <%=returnFlights[i].origin.city%>,<br>
                                                                 <%=returnFlights[i].origin.airport%>
                                                     </td>
-                                                    <td colspan ='3'>
-                                                        <%=returnFlights[i].destination.country%>,
-                                                            <%=returnFlights[i].destination.city%>,
+                                                    <td colspan ='2'>
+                                                        <%=returnFlights[i].destination.country%>,<br>
+                                                            <%=returnFlights[i].destination.city%>,<br>
                                                                 <%=returnFlights[i].destination.airport%>
                                                     </td>
                                                     <td>

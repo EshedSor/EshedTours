@@ -54,7 +54,12 @@ const flightSchema = new schema(
           const plane = await Plane.findById(this.plane);
           var allSeats = [...Array(plane.seats).keys()];
           var takenSeats = await this.getSoldTickets();
-          const freeSeats = allSeats.filter((word) => !(word in takenSeats));
+          var taken = takenSeats.map((ticket) => {
+            return ticket.seat;
+          });
+          console.log(taken);
+          const freeSeats = allSeats.filter((seat) => !taken.includes(seat));
+          console.log("free" + freeSeats);
           //console.log(JSON.stringify(freeSeats));
           return JSON.stringify(freeSeats);
         } catch (e) {
